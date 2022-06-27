@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-use App\Models\PostOld;
+use App\Models\Category;
 use Illuminate\Support\Facades\File;
 
 /*
@@ -24,23 +24,19 @@ Route::get('/', function () {
     
 });
 
-Route::get('post/{post}', function($id) {
+Route::get('post/{post:slug}', function(Post $post) {
     
-    return view('post', ['post' => Post::findOrFail($id)]);
-
+    return view('post', 
+        [
+            'post' => $post
+        ]);
 });
 
+Route::get('categories/{category}', function (Category $category){
 
-/*Route::get('/', function () {
-    
-    return view('posts', [
-        'posts' => PostOld::todo()
-    ]);
-    
+    return view('post', 
+        [
+            'post' => $category->post
+        ]);
+
 });
-
-Route::get('post/{post}', function($slug) {
-    
-    return view('post', ['post' => PostOld::findOrFail($slug)]);
-
-});*/
