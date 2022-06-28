@@ -5,6 +5,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\File;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +18,13 @@ use Illuminate\Support\Facades\File;
 */
 
 Route::get('/', function () {
+
+    /*\Illuminate\Support\Facades\DB::listen( function($query) {
+        logger($query->sql, $query->bindings);
+    });*/
     
     return view('posts', [
-        'posts' => Post::all()
+        'posts' => Post::with('category')->get()
     ]);
     
 });
@@ -32,9 +37,9 @@ Route::get('post/{post:slug}', function(Post $post) {
         ]);
 });
 
-Route::get('categories/{category}', function (Category $category){
+Route::get('categories/{category:slug}', function (Category $category){
 
-    return view('post', 
+    return view('categories', 
         [
             'post' => $category->post
         ]);

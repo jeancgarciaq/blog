@@ -6,7 +6,7 @@
                     {{ $post->title }}
                 </a>
             </h1>
-            <p><strong>Category:</strong> <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a></p>
+            <p><strong>Category:</strong> <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
             <p>{{ $post->excerpt }}</p>
         </article>
         @endforeach
